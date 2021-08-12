@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Decorder</h2>
+  <br />
+  <p>
+    encoded pako Uint 8 Array will decoded here.
+  </p>
+  <p>
+    Put a valid JSON type encoded array here.
+  </p>
+  <br /><br />
+
+  <ion-row>
+    <ion-col>
+      <h4>ENCODE CODE</h4>
+      <ion-item>
+        <ion-textarea rows="8" [(ngModel)]="sample_code" name="sample_code" autocomplete="off" autocorrect="off"
+          placeholder='paste the below template here...
+
+        [120, -38, -115, 88, 75, -109, -37, 54, ... ]'>
+        </ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <br />
+    <br />
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button (click)="decode()">Decode</button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <h4>OUTPUT</h4>
+      <ion-item>
+        <ion-textarea rows="10" [(ngModel)]="sample_output" name="sample_event" autocomplete="off" autocorrect="off"
+          placeholder="{}" [readonly]="true">
+        </ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-content>
