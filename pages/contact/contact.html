@@ -20,8 +20,8 @@
     <ion-col>
       <h4>JSON</h4>
       <ion-item>
-        <ion-textarea rows="8" [(ngModel)]="sample_json" name="sample_json" autocomplete="off" autocorrect="off"
-          placeholder='paste a valid JSON here...'>
+        <ion-textarea required=true rows="8" [(ngModel)]="sample_json" name="sample_json" autocomplete="off"
+          autocorrect="off" placeholder='paste a valid JSON here...'>
         </ion-textarea>
       </ion-item>
     </ion-col>
@@ -33,7 +33,14 @@
   </ion-row>
 
   <ion-row>
-    <ion-col>
+    <ion-col size="9">
+      <ion-item>
+        <ion-label position="floating">File Name: </ion-label>
+        <ion-textarea [(ngModel)]="sample_name"></ion-textarea>
+      </ion-item>
+    </ion-col>
+    <ion-col size="3">
+
       <button ion-button (click)="changed()">EXPORT&nbsp;&nbsp;<ion-icon name="cloud-download"></ion-icon></button>
     </ion-col>
   </ion-row>
@@ -47,5 +54,42 @@
         </ion-textarea>
       </ion-item>
     </ion-col>
+  </ion-row>
+  <ion-row>
+    <!-- Default textarea -->
+    <!-- <ion-textarea></ion-textarea> -->
+
+    <!-- Textarea in an item with a placeholder -->
+    <!-- <ion-item>
+  <ion-textarea placeholder="Enter more information here..."></ion-textarea>
+</ion-item> -->
+
+    <!-- Textarea in an item with a floating label -->
+    <!-- <ion-item>
+  <ion-label position="floating">Description</ion-label>
+  <ion-textarea></ion-textarea>
+</ion-item> -->
+
+    <!-- Disabled and readonly textarea in an item with a stacked label -->
+    <!-- <ion-item>
+  <ion-label position="stacked">Summary</ion-label>
+  <ion-textarea
+    disabled
+    readonly
+    value="Ionic enables developers to build performant, high-quality mobile apps.">
+  </ion-textarea>
+</ion-item> -->
+
+    <!-- Textarea that clears the value on edit -->
+    <!-- <ion-item>
+  <ion-label>Comment</ion-label>
+  <ion-textarea clearOnEdit="true"></ion-textarea>
+</ion-item> -->
+
+    <!-- Textarea with custom number of rows and cols -->
+    <!-- <ion-item>
+  <ion-label>Notes</ion-label>
+  <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..."></ion-textarea>
+</ion-item> -->
   </ion-row>
 </ion-content>

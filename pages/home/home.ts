@@ -61,7 +61,9 @@ export class HomePage {
       // console.log(this.toJson(sample_query));
     } catch (e) {
       console.log('query processing error ->> ', e);
-      this.presentToast('JSON Format ERROR in query', 2000);
+      setTimeout(function() {
+        __this.presentToast('JSON Format ERROR in query', 1000);
+      }, 1000);
     }
 
     try {
@@ -86,7 +88,9 @@ export class HomePage {
       this.sample_output = this.deepCopy(sample_query);
     } catch (e) {
       console.log('data processing error ->> ', e);
-      this.presentToast('ERROR in data processing', 3000);
+      setTimeout(function() {
+        __this.presentToast('ERROR in data processing', 3000);
+      }, 2000);
     }
   }
 
