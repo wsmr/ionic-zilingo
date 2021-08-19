@@ -1,48 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 var _ = require('lodash');
+let xlsx = require('json-as-xlsx');
 
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html'
 })
 export class ContactPage {
-  public sample_request = {
-    requests: [
-      {
-        req_id: 'packed_analysis_request',
-        req_args: [{ key: '@filter_value6', value: [] }]
-      }
-    ]
-  };
-  public sample_query = {
-    query: {
-      dimensions: [
-        {
-          type: 'extraction',
-          dimension: 'subject',
-          outputName: 'subject',
-          extractionFn: {
-            type: 'javascript',
-            function:
-              "function(x) {if(x==null) return 'N/A';var a = x.split('-');var b = a.splice(a.length-@subject_splitter,@subject_splitter);var c = a.join('-'); return c;}"
-          }
-        },
-        '@time_block1'
-      ],
-      granularity: '@granularity',
-      filter: {
-        type: 'and',
-        fields: [
-          {
-            type: '@filter_type7',
-            dimension: '@filter_dim7',
-            values: '@filter_value7'
-          }
-        ]
-      }
-    }
-  };
+  public sample_request: Object;
+  public sample_query;
   public sample_output: string;
   constructor(
     public navCtrl: NavController,
@@ -67,73 +34,46 @@ export class ContactPage {
     let sample_request: object;
     console.log('changed');
 
-    try {
-      console.log(
-        'requests/req_args -> ' +
-          this.toString(this.sample_request['requests'][0]['req_args'])
-      );
-      sample_request = this.sample_request['requests'][0]['req_args'];
-    } catch (e) {
-      console.log('request processing error ->> ', e);
-      this.presentToast('JSON Format ERROR in request', 1000);
-    }
+    let data = [
+      {
+        sheet: 'Adults',
+        columns: [
+          { label: 'User', value: 'user' }, // Top level data
+          { label: 'Age', value: row => row.age + ' years' }, // Run functions
+          {
+            label: 'Phone',
+            value: row => (row.more ? row.more.phone || '' : '')
+          } // Deep props
+        ],
+        content: [
+          { user: 'Andrea', age: 20, more: { phone: '11111111' } },
+          { user: 'Luis', age: 21, more: { phone: '12345678' } }
+        ]
+      },
+      {
+        sheet: 'Children',
+        columns: [
+          { label: 'User', value: 'user' }, // Top level data
+          { label: 'Age', value: row => row.age + ' years' }, // Run functions
+          {
+            label: 'Phone',
+            value: row => (row.more ? row.more.phone || '' : '')
+          } // Deep props
+        ],
+        content: [
+          { user: 'Manuel', age: 16, more: { phone: '99999999' } },
+          { user: 'Ana', age: 17, more: { phone: '87654321' } }
+        ]
+      }
+    ];
 
-    try {
-      console.log('query -> ' + this.toString(this.sample_query['query']));
-      sample_query = this.toString(this.sample_query['query']);
-      // if(_.has(sample_query, '_id')) {
-      //   delete sample_query['_id'];
-      // }
-    } catch (e) {
-      console.log('query processing error ->> ', e);
-      this.presentToast('JSON Format ERROR in query', 2000);
-    }
+    let settings = {
+      fileName: 'MySpreadsheet', // Name of the spreadsheet
+      extraLength: 3, // A bigger number means that columns will be wider
+      writeOptions: {} // Style options from https://github.com/SheetJS/sheetjs#writing-options
+    };
 
-    try {
-      _.forEach(sample_request, function(obj) {
-        if (typeof obj.value === 'boolean') {
-          sample_query = __this.replaceSpec(
-            sample_query,
-            obj.key,
-            obj.value,
-            'boolean'
-          );
-        } else if (Array.isArray(obj.value)) {
-          sample_query = __this.replaceSpec(
-            sample_query,
-            obj.key,
-            obj.value,
-            'object'
-          );
-        } else sample_query = sample_query.replaceAll(obj.key, obj.value);
-      });
-      // sample_query.replace("@ds", "ds5");
-      this.sample_output = this.deepCopy(sample_query);
-    } catch (e) {
-      console.log('data processing error ->> ', e);
-      this.presentToast('ERROR in data processing', 3000);
-    }
-  }
-
-  replaceSpec(query: string, key: string, value: any, type: string) {
-    let queryJS = this.toJson(query);
-    console.log('queryJS', queryJS);
-    _.forEach(queryJS, function(obj) {
-      console.log('obj', obj);
-    });
-    switch (type) {
-      case 'boolean':
-        console.log('boolean', key, value);
-        return _.replace(query, key, value);
-        break;
-      case 'object':
-        console.log('object', key, value);
-        let stringArr = '[' + value.toString() + ']';
-        return _.replace(query, key, stringArr);
-        break;
-      default:
-        console.log('default');
-    }
+    xlsx(data, settings); // Will download the excel file
   }
 
   toJson(data: any) {
