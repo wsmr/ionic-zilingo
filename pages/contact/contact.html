@@ -1,40 +1,29 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Contact
-    </ion-title>
+    <ion-title>Exceler</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <h2>This is a tool that helps to build an excel from a json</h2>
+  <br />
+  <p>
+    To convert a JSON file to a CSV/Excel spreadsheet.
+  </p>
+  <p>
+    Put a valid JSON type Object values here.
+  </p>
+  <br /><br />
+
   <ion-row>
-    <ion-col>
-      <h4>REQUEST</h4>
-      <!-- <ion-item>
-        <ion-textarea rows="8" [(ngModel)]="sample_request" name="sample_request" autocomplete="off" autocorrect="off"
-          placeholder='paste the below template here...
 
-      {
-        "requests": [
-          {
-            "req_args": [ ]
-          }
-        ]
-      }'>
-        </ion-textarea>
-      </ion-item> -->
-    </ion-col>
     <ion-col>
-      <h4>QUERY</h4>
-      <!-- <ion-item>
-        <ion-textarea rows="8" [(ngModel)]="sample_query" name="sample_query" autocomplete="off" autocorrect="off"
-          placeholder='paste the below template here...
-
-      {
-        "query": { }
-      }'>
+      <h4>JSON</h4>
+      <ion-item>
+        <ion-textarea rows="8" [(ngModel)]="sample_json" name="sample_json" autocomplete="off" autocorrect="off"
+          placeholder='paste a valid JSON here...'>
         </ion-textarea>
-      </ion-item> -->
+      </ion-item>
     </ion-col>
   </ion-row>
 
@@ -45,7 +34,7 @@
 
   <ion-row>
     <ion-col>
-      <button ion-button (click)="changed()">REPLACE</button>
+      <button ion-button (click)="changed()">EXPORT&nbsp;&nbsp;<ion-icon name="cloud-download"></ion-icon></button>
     </ion-col>
   </ion-row>
 

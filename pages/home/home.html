@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Replacer</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -19,12 +19,7 @@
     <ion-col>
       <h4>REQUEST</h4>
       <ion-item>
-        <ion-textarea
-          rows="8"
-          [(ngModel)]="sample_request"
-          name="sample_request"
-          autocomplete="off"
-          autocorrect="off"
+        <ion-textarea rows="8" [(ngModel)]="sample_request" name="sample_request" autocomplete="off" autocorrect="off"
           placeholder='paste the below template here...
 
           {
@@ -33,26 +28,19 @@
                 "req_args": [ ]
               }
             ]
-          }'
-        >
+          }'>
         </ion-textarea>
       </ion-item>
     </ion-col>
     <ion-col>
       <h4>QUERY</h4>
       <ion-item>
-        <ion-textarea
-          rows="8"
-          [(ngModel)]="sample_query"
-          name="sample_query"
-          autocomplete="off"
-          autocorrect="off"
+        <ion-textarea rows="8" [(ngModel)]="sample_query" name="sample_query" autocomplete="off" autocorrect="off"
           placeholder='paste the below template here...
 
           {
             "query": { }
-          }'
-        >
+          }'>
         </ion-textarea>
       </ion-item>
     </ion-col>
@@ -73,15 +61,8 @@
     <ion-col>
       <h4>OUTPUT</h4>
       <ion-item>
-        <ion-textarea
-          rows="10"
-          [(ngModel)]="sample_output"
-          name="sample_event"
-          autocomplete="off"
-          autocorrect="off"
-          placeholder="{}"
-          [readonly]="true"
-        >
+        <ion-textarea rows="10" [(ngModel)]="sample_output" name="sample_event" autocomplete="off" autocorrect="off"
+          placeholder="{}" [readonly]="true">
         </ion-textarea>
       </ion-item>
     </ion-col>

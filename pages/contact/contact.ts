@@ -8,8 +8,7 @@ let xlsx = require('json-as-xlsx');
   templateUrl: 'contact.html'
 })
 export class ContactPage {
-  public sample_request: Object;
-  public sample_query;
+  public sample_json: Object;
   public sample_output: string;
   constructor(
     public navCtrl: NavController,
