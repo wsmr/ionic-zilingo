@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 var _ = require('lodash');
-let xlsx = require('json-as-xlsx');
+var xlsx = require('json-as-xlsx');
 
 @Component({
   selector: 'page-contact',
