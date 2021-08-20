@@ -54,6 +54,7 @@ export class AboutPage {
       console.log(
         'query -> ' + this.toString(this.toJson(this.sample_query)['query'])
       );
+      sample_query = this.toJson(this.sample_query)['query'];
     } catch (e) {
       console.log('query processing error ->> ', e);
       setTimeout(function() {
@@ -62,10 +63,10 @@ export class AboutPage {
     }
 
     try {
-      sample_query = this.toString(this.sample_query);
+      sample_query = this.toString(sample_query);
       sample_query = sample_query.replaceAll('"', '');
 
-      _.forEach(this.sample_query, function(obj: { value: any; key: string }) {
+      _.forEach(sample_request, function(obj: { value: any; key: string }) {
         if (typeof obj.value === 'boolean') {
           sample_query = __this.replaceSpec(
             sample_query,
