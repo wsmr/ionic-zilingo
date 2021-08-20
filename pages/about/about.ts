@@ -32,6 +32,8 @@ export class AboutPage {
     this.sample_output = '';
     let sample_query: string;
     let sample_request: string;
+    let collection: string;
+    let query_type: string;
 
     console.log('changed');
 
@@ -54,7 +56,17 @@ export class AboutPage {
       console.log(
         'query -> ' + this.toString(this.toJson(this.sample_query)['query'])
       );
+      console.log(
+        'query type -> ' +
+          this.toString(this.toJson(this.sample_query)['collection'])
+      );
+      console.log(
+        'query collection -> ' +
+          this.toString(this.toJson(this.sample_query)['query_type'])
+      );
       sample_query = this.toJson(this.sample_query)['query'];
+      collection = this.toJson(this.sample_query)['collection'];
+      query_type = this.toJson(this.sample_query)['query_type'];
     } catch (e) {
       console.log('query processing error ->> ', e);
       setTimeout(function() {
@@ -94,6 +106,10 @@ export class AboutPage {
           );
         }
       });
+
+      let getCollection =
+        'db.getCollection("' + collection + '").' + query_type + '(';
+      console.log('OPERATION ->> ', getCollection);
       this.sample_output = this.deepCopy(sample_query);
     } catch (e) {
       console.log('data processing error ->> ', e);
