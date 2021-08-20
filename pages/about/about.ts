@@ -108,7 +108,7 @@ export class AboutPage {
       });
 
       let getCollection =
-        'db.getCollection("' + collection + '").' + query_type + '(';
+        'db.getCollection("' + collection + '").' + query_type + '(OUTPUT)';
       console.log('OPERATION ->> ', getCollection);
       this.sample_output = this.deepCopy(sample_query);
     } catch (e) {
