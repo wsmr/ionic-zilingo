@@ -1,11 +1,77 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      MongoDB
-    </ion-title>
+    <ion-title>MongoDB</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <h2>Request Query Replacer</h2>
+  <br />
+  <p>
+    Query <<- ->> values will be replaced by the values in the request.
+  </p>
+  <p>
+    Put a valid JSON type Object values here.
+  </p>
+  <br /><br />
 
+  <!-- <ion-row>
+  <ion-col>
+    <h4>REQUEST</h4>
+    <ion-item>
+      <ion-textarea required=true rows="8" [(ngModel)]="sample_request" name="sample_request" autocomplete="off"
+        autocorrect="off" placeholder='paste the below template here...
+
+      {
+        "requests": [
+          {
+            "req_args": [ ]
+          }
+        ]
+      }'>
+      </ion-textarea>
+    </ion-item>
+  </ion-col>
+  <ion-col>
+    <h4>QUERY</h4>
+    <ion-item>
+      <ion-textarea required=true rows="8" [(ngModel)]="sample_query" name="sample_query" autocomplete="off"
+        autocorrect="off" placeholder='paste the below template here...
+
+      {
+        "query": { }
+      }'>
+      </ion-textarea>
+    </ion-item>
+  </ion-col>
+</ion-row> -->
+
+  <ion-row>
+    <br />
+    <br />
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button (click)="changed()">REPLACE</button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <h4>OUTPUT</h4>
+      <ion-item>
+        <ion-textarea
+          rows="10"
+          [(ngModel)]="sample_output"
+          name="sample_event"
+          autocomplete="off"
+          autocorrect="off"
+          placeholder="{}"
+          [readonly]="true"
+        >
+        </ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
 </ion-content>
