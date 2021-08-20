@@ -15,6 +15,7 @@ export class DecoderPage {
     public toastController: ToastController
   ) {}
   decode() {
+    const __this = this;
     let encodedStr: Uint8Array;
     this.sample_output = '';
 
@@ -34,7 +35,9 @@ export class DecoderPage {
       this.sample_output = this.deepCopy(inflatedStr);
     } catch (e) {
       console.log('data processing error ->> ', e);
-      this.presentToast('ERROR in data processing', 3000);
+      setTimeout(function() {
+        __this.presentToast('ERROR in data processing', 3000);
+      }, 1000);
     }
   }
 
