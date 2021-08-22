@@ -57,11 +57,11 @@ export class AboutPage {
         'query -> ' + this.toString(this.toJson(this.sample_query)['query'])
       );
       console.log(
-        'query type -> ' +
+        'query collection -> ' +
           this.toString(this.toJson(this.sample_query)['collection'])
       );
       console.log(
-        'query collection -> ' +
+        'query type -> ' +
           this.toString(this.toJson(this.sample_query)['query_type'])
       );
       sample_query = this.toJson(this.sample_query)['query'];
