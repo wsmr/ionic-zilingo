@@ -77,7 +77,7 @@ export class AboutPage {
     try {
       sample_query = this.toString(sample_query);
       sample_query = sample_query.replaceAll('"', '');
-      console.log('%c <<--  Changes Start -->> ', 'font-size: 15px');
+
       _.forEach(sample_request, function(obj: { value: any; key: string }) {
         if (typeof obj.value === 'boolean') {
           sample_query = __this.replaceSpec(
@@ -106,7 +106,7 @@ export class AboutPage {
           );
         }
       });
-      console.log('%c <<--  Changes End -->> ', 'font-size: 15px');
+
       let getCollection =
         'db.getCollection("' + collection + '").' + query_type;
       console.log('%c <<--  OPERATION  -->> ', 'font-size: 20px');
