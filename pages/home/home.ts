@@ -109,11 +109,21 @@ export class HomePage {
   replaceSpec(query: string, key: string, value: any, type: string) {
     switch (type) {
       case 'boolean':
-        console.log('boolean', key, value);
+        console.log(
+          '%c' + 'boolean',
+          'color:blue; font-family:monospace',
+          key,
+          value
+        );
         return query.replaceAll(key, value);
         break;
       case 'object':
-        console.log('object', key, value);
+        console.log(
+          '%c' + 'object',
+          'color:blue; font-family:monospace',
+          key,
+          value
+        );
         let stringArr = '[' + value.toString() + ']';
         return query.replaceAll(key, stringArr);
         break;

@@ -77,7 +77,7 @@ export class AboutPage {
     try {
       sample_query = this.toString(sample_query);
       sample_query = sample_query.replaceAll('"', '');
-
+      console.log('%c <<--  Changes Start -->> ', 'font-size: 15px');
       _.forEach(sample_request, function(obj: { value: any; key: string }) {
         if (typeof obj.value === 'boolean') {
           sample_query = __this.replaceSpec(
@@ -106,10 +106,14 @@ export class AboutPage {
           );
         }
       });
-
+      console.log('%c <<--  Changes End -->> ', 'font-size: 15px');
       let getCollection =
-        'db.getCollection("' + collection + '").' + query_type + '(OUTPUT)';
-      console.log('OPERATION ->> ', getCollection);
+        'db.getCollection("' + collection + '").' + query_type;
+      console.log('%c <<--  OPERATION  -->> ', 'font-size: 20px');
+      console.log(
+        getCollection + '%c' + '(OUTPUT)',
+        'color:red; font-family:monospace;font-weight:bold;'
+      );
       this.sample_output = this.deepCopy(sample_query);
     } catch (e) {
       console.log('data processing error ->> ', e);
@@ -134,11 +138,21 @@ export class AboutPage {
   replaceSpec(query: string, key: string, value: any, type: string) {
     switch (type) {
       case 'boolean':
-        console.log('boolean', key, value);
+        console.log(
+          '%c' + 'boolean',
+          'color:blue; font-family:monospace',
+          key,
+          value
+        );
         return query.replaceAll(key, value);
         break;
       case 'object':
-        console.log('object', key, value);
+        console.log(
+          '%c' + 'object',
+          'color:blue; font-family:monospace',
+          key,
+          value
+        );
         let stringArr = '[' + value.toString() + ']';
         return query.replaceAll(key, stringArr);
         break;
