@@ -34,6 +34,7 @@ export class AboutPage {
     let sample_request: string;
     let collection: string;
     let query_type: string;
+    let execute = true;
 
     console.log('changed');
 
@@ -50,6 +51,7 @@ export class AboutPage {
     } catch (e) {
       console.log('request processing error ->> ', e);
       this.presentToast('JSON Format ERROR in request', 1000);
+      execute = false;
     }
 
     try {
@@ -72,55 +74,58 @@ export class AboutPage {
       setTimeout(function() {
         __this.presentToast('JSON Format ERROR in query', 1000);
       }, 1000);
+      execute = false;
     }
 
-    try {
-      sample_query = this.toString(sample_query);
-      sample_query = sample_query.replaceAll('"', '');
+    if (execute) {
+      try {
+        sample_query = this.toString(sample_query);
+        sample_query = sample_query.replaceAll('"', '');
 
-      _.forEach(sample_request, function(obj: { value: any; key: string }) {
-        if (typeof obj.value === 'boolean') {
-          sample_query = __this.replaceSpec(
-            sample_query,
-            __this.getReplaseKey(obj.key),
-            obj.value,
-            'boolean'
-          );
-        } else if (Array.isArray(obj.value)) {
-          sample_query = __this.replaceSpec(
-            sample_query,
-            __this.getReplaseKey(obj.key),
-            obj.value,
-            'object'
-          );
-        } else {
-          // console.log(
-          //   'Key: ',
-          //   __this.getReplaseKey(obj.key),
-          //   'Value: ',
-          //   obj.value
-          // );
-          sample_query = sample_query.replaceAll(
-            __this.getReplaseKey(obj.key),
-            obj.value
-          );
-        }
-      });
+        _.forEach(sample_request, function(obj: { value: any; key: string }) {
+          if (typeof obj.value === 'boolean') {
+            sample_query = __this.replaceSpec(
+              sample_query,
+              __this.getReplaseKey(obj.key),
+              obj.value,
+              'boolean'
+            );
+          } else if (Array.isArray(obj.value)) {
+            sample_query = __this.replaceSpec(
+              sample_query,
+              __this.getReplaseKey(obj.key),
+              obj.value,
+              'object'
+            );
+          } else {
+            // console.log(
+            //   'Key: ',
+            //   __this.getReplaseKey(obj.key),
+            //   'Value: ',
+            //   obj.value
+            // );
+            sample_query = sample_query.replaceAll(
+              __this.getReplaseKey(obj.key),
+              obj.value
+            );
+          }
+        });
 
-      let getCollection =
-        'db.getCollection("' + collection + '").' + query_type;
-      console.log('%c <<--  OPERATION  -->> ', 'font-size: 20px');
-      console.log(
-        getCollection + '(' + '%cOUTPUT' + '%c)',
-        'color:red; font-family:monospace;font-weight:bold;',
-        'color:black;'
-      );
-      this.sample_output = this.deepCopy(sample_query);
-    } catch (e) {
-      console.log('data processing error ->> ', e);
-      setTimeout(function() {
-        __this.presentToast('ERROR in data processing', 3000);
-      }, 2000);
+        let getCollection =
+          'db.getCollection("' + collection + '").' + query_type;
+        console.log('%c <<--  OPERATION  -->> ', 'font-size: 20px');
+        console.log(
+          getCollection + '(' + '%cOUTPUT' + '%c)',
+          'color:red; font-family:monospace;font-weight:bold;',
+          'color:black;'
+        );
+        this.sample_output = this.deepCopy(sample_query);
+      } catch (e) {
+        console.log('data processing error ->> ', e);
+        setTimeout(function() {
+          __this.presentToast('ERROR in data processing', 3000);
+        }, 2000);
+      }
     }
   }
 

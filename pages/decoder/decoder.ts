@@ -18,6 +18,7 @@ export class DecoderPage {
     const __this = this;
     let encodedStr: Uint8Array;
     this.sample_output = '';
+    let execute = true;
 
     try {
       encodedStr = this.toJson(this.sample_code);
@@ -25,19 +26,23 @@ export class DecoderPage {
     } catch (e) {
       console.log('request processing error ->> ', e);
       this.presentToast('JSON Format ERROR in encoded code', 2000);
+      execute = false;
     }
-    try {
-      let gzip = encodedStr;
-      let byteArray = new Uint8Array(gzip);
-      let inflatedStr = pako.inflate(byteArray, { to: 'string' });
 
-      console.log('inflatedStr', inflatedStr);
-      this.sample_output = this.deepCopy(inflatedStr);
-    } catch (e) {
-      console.log('data processing error ->> ', e);
-      setTimeout(function() {
-        __this.presentToast('ERROR in data processing', 3000);
-      }, 1000);
+    if (execute) {
+      try {
+        let gzip = encodedStr;
+        let byteArray = new Uint8Array(gzip);
+        let inflatedStr = pako.inflate(byteArray, { to: 'string' });
+
+        console.log('inflatedStr', inflatedStr);
+        this.sample_output = this.deepCopy(inflatedStr);
+      } catch (e) {
+        console.log('data processing error ->> ', e);
+        setTimeout(function() {
+          __this.presentToast('ERROR in data processing', 3000);
+        }, 1000);
+      }
     }
   }
 

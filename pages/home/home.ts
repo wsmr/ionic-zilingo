@@ -33,7 +33,8 @@ export class HomePage {
     let sample_query: string;
     let sample_request: string;
     console.log('changed');
-    
+    let execute = true;
+
     try {
       console.log(
         'requests/req_args -> ' +
@@ -47,6 +48,7 @@ export class HomePage {
     } catch (e) {
       console.log('request processing error ->> ', e);
       this.presentToast('JSON Format ERROR in request', 1000);
+      execute = false;
     }
 
     try {
@@ -64,33 +66,36 @@ export class HomePage {
       setTimeout(function() {
         __this.presentToast('JSON Format ERROR in query', 1000);
       }, 1000);
+      execute = false;
     }
 
-    try {
-      _.forEach(sample_request, function(obj: { value: any; key: string }) {
-        if (typeof obj.value === 'boolean') {
-          sample_query = __this.replaceSpec(
-            sample_query,
-            obj.key,
-            obj.value,
-            'boolean'
-          );
-        } else if (Array.isArray(obj.value)) {
-          sample_query = __this.replaceSpec(
-            sample_query,
-            obj.key,
-            obj.value,
-            'object'
-          );
-        } else sample_query = sample_query.replaceAll(obj.key, obj.value);
-      });
-      // sample_query.replace("@ds", "ds5");
-      this.sample_output = this.deepCopy(sample_query);
-    } catch (e) {
-      console.log('data processing error ->> ', e);
-      setTimeout(function() {
-        __this.presentToast('ERROR in data processing', 3000);
-      }, 2000);
+    if (execute) {
+      try {
+        _.forEach(sample_request, function(obj: { value: any; key: string }) {
+          if (typeof obj.value === 'boolean') {
+            sample_query = __this.replaceSpec(
+              sample_query,
+              obj.key,
+              obj.value,
+              'boolean'
+            );
+          } else if (Array.isArray(obj.value)) {
+            sample_query = __this.replaceSpec(
+              sample_query,
+              obj.key,
+              obj.value,
+              'object'
+            );
+          } else sample_query = sample_query.replaceAll(obj.key, obj.value);
+        });
+        // sample_query.replace("@ds", "ds5");
+        this.sample_output = this.deepCopy(sample_query);
+      } catch (e) {
+        console.log('data processing error ->> ', e);
+        setTimeout(function() {
+          __this.presentToast('ERROR in data processing', 3000);
+        }, 2000);
+      }
     }
   }
 
