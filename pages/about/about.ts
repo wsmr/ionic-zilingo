@@ -111,8 +111,9 @@ export class AboutPage {
         'db.getCollection("' + collection + '").' + query_type;
       console.log('%c <<--  OPERATION  -->> ', 'font-size: 20px');
       console.log(
-        getCollection + '%c' + '(OUTPUT)',
-        'color:red; font-family:monospace;font-weight:bold;'
+        getCollection + '(' + '%cOUTPUT' + '%c)',
+        'color:red; font-family:monospace;font-weight:bold;',
+        'color:black;'
       );
       this.sample_output = this.deepCopy(sample_query);
     } catch (e) {

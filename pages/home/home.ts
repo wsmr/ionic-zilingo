@@ -33,7 +33,7 @@ export class HomePage {
     let sample_query: string;
     let sample_request: string;
     console.log('changed');
-
+    
     try {
       console.log(
         'requests/req_args -> ' +
